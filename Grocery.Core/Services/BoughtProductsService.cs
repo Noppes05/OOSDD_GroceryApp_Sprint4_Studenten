@@ -33,7 +33,7 @@ namespace Grocery.Core.Services
                     Product? product = _productRepository.Get(g.ProductId);
                     if (product == null) continue;
                     boughtProducts.Add(new BoughtProducts(client, groceryList, product));
-            }
+                }
             return boughtProducts;
         }
     }
