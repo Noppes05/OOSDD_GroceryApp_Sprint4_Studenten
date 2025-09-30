@@ -38,7 +38,7 @@ namespace Grocery.Core.Data.Repositories
 
         public GroceryListItem? Delete(GroceryListItem item)
         {
-            return groceryListItems.Remove(item) ? item : null;
+            throw new NotImplementedException();
         }
 
         public GroceryListItem? Get(int id)
