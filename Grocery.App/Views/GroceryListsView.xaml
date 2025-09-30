@@ -14,7 +14,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Grid.ColumnSpan="2" Text="Boodschappenlijsten" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" />
-            <Button Grid.Column="2" Text="{Binding Client.Name}" Command="{Binding ShowBoughtProductsCommand}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Button Grid.Column="2" Text="{Binding Client.Name}" Command="{Binding ShowBoughtProductsCommand}" Background="Transparent" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
         </Grid>
     </Shell.TitleView>
 
