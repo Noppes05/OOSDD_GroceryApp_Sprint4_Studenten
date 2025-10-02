@@ -50,8 +50,44 @@ namespace Grocery.Core.Services
         }
 
         public List<BestSellingProducts> GetBestSellingProducts(int topX = 5)
-        {
-            throw new NotImplementedException();
+        {// getting all grocery list items and counting the occurrences of each product id
+            Dictionary<int, int> productCount = new Dictionary<int, int>();
+            try
+            {
+                List<GroceryListItem> groceryListItems = _groceriesRepository.GetAll();
+                foreach (GroceryListItem g in groceryListItems)
+                {
+                    if (productCount.ContainsKey(g.ProductId))
+                    {
+                        productCount[g.ProductId] += g.Amount;
+                    }
+                    else
+                    {
+                        productCount.Add(g.ProductId, g.Amount);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving grocery list items: {ex.Message}");
+                return new List<BestSellingProducts>();
+            }
+
+            // sorting the dictionary by value and taking the top X
+            Dictionary<int, int> sortedProductCount = productCount.ToList().OrderByDescending(pc => pc.Value).Take(topX).ToDictionary();
+
+            //filling the best selling products list
+            List<BestSellingProducts> bestSellingProducts = new List<BestSellingProducts>();
+            int i = 1;
+            foreach (KeyValuePair<int, int> pc in sortedProductCount)
+            {
+                Product product = _productRepository.Get(pc.Key);
+                if (product == null) continue;
+                bestSellingProducts.Add(new BestSellingProducts(product.Id, product.Name, product.Stock,pc.Value,i));
+                i++;
+            }
+            return bestSellingProducts;
+
         }
 
         private void FillService(List<GroceryListItem> groceryListItems)
