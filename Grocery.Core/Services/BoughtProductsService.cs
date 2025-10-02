@@ -23,6 +23,7 @@ namespace Grocery.Core.Services
 
                 if (productId == null) return new List<BoughtProducts>();
                 List<GroceryListItem> groceryListItems = _groceryListItemsRepository.GetAll().Where(g => g.ProductId == productId).ToList();
+                if (groceryListItems.Count == 0) return new List<BoughtProducts>();
                 List<BoughtProducts> boughtProducts = new List<BoughtProducts>();
                 foreach (GroceryListItem g in groceryListItems)
                 {
