@@ -112,13 +112,7 @@ namespace Grocery.App.ViewModels
         {
             GroceryListItem? item = MyGroceryListItems.FirstOrDefault(x => x.ProductId == productId);
             if (item == null) return;
-            if (item.Amount <= 1)
-            {
-                _groceryListItemsService.Delete(item);
-                OnGroceryListChanged(GroceryList);
-                return;
-            }
-            ;
+            if (item.Amount <= 0) return;
             item.Amount--;
             _groceryListItemsService.Update(item);
             item.Product.Stock++;

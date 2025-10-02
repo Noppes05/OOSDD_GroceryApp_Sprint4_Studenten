@@ -59,7 +59,7 @@
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer 
                                         Command="{Binding Path=BindingContext.IncreaseAmountCommand, Source={x:Reference GroceryListCollectionView}}" 
-                                        CommandParameter="{Binding ProductId}"/>
+                                        CommandParameter="{Binding ProductId}"/> 
                                 </Image.GestureRecognizers>
                             </Grid>
                             <Grid Grid.Column="3">
